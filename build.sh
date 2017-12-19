@@ -80,6 +80,9 @@ if [ -f env.sh ] ; then
 	. env.sh
 fi
 
+if [[ -z "$(which arm-linux-gnueabihf-gcc)" ]];then echo "please install first gcc-arm-linux-gnueabihf";exit 1;fi
+if [[ -z "$(which mkimage)" ]];then echo "please install first u-boot-tools";exit 1;fi
+
 echo "This tool support following building mode(s):"
 echo "--------------------------------------------------------------------------------"
 echo "	1. Build all, uboot and kernel and pack to download images."
