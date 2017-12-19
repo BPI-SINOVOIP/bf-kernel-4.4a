@@ -104,24 +104,32 @@ if [ -z "$mode" ]; then
         mode=1
 fi
 
-echo -e "\033[31m Now building...\033[0m"
+echo -e "\033[33m Now building...\033[0m"
 echo
+ret=1
+
+logfile="$(dirname $0)/build.log"
+exec 3> >(tee $logfile)
+
 case $mode in
-	1) RET=1;make && 
-	   make pack && 
+	1) make &&
+	   make pack &&
 	   cp_download_files &&
-           RET=0
+       ret=0
            ;;
-	2) make u-boot;;
-	3) make kernel;;
+	2) make u-boot&&ret=0;;
+	3) make kernel&&ret=0;;
 	4) make kernel-config;;
 	5) make pack;;
 	6) cp_download_files;;
 	7) make clean;;
 esac
+
+exec 3>&-
+
 echo
 
-if [ "$RET" -eq "0" ];
+if [ "$ret" -eq "0" ];
 then
   echo -e "\033[32m Build success!\033[0m"
 else
