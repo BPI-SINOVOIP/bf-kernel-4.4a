@@ -655,11 +655,11 @@
 	};
 };
 
-&uart0 {
+&uart0 { //UART0=Con1 Pin 11/13 (TX/RX)
 	status="okay";
 };
 
-&uart1 {
+&uart1 { //UART1=Con1 Pin 8/10 (TX/RX)
 	status="okay";
 };
 
