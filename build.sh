@@ -112,17 +112,17 @@ logfile="$(dirname $0)/build.log"
 exec 3> >(tee $logfile)
 
 case $mode in
-	1) make &&
-	   make pack &&
+	1) make 2>&3 &&
+	   make pack 2>&3 &&
 	   cp_download_files &&
        ret=0
            ;;
-	2) make u-boot&&ret=0;;
-	3) make kernel&&ret=0;;
-	4) make kernel-config;;
-	5) make pack;;
-	6) cp_download_files;;
-	7) make clean;;
+	2) make u-boot 2>&3 &&ret=0;;
+	3) make kernel 2>&3 &&ret=0;;
+	4) make kernel-config && ret=0;;
+	5) make pack 2>&3 && ret=0;;
+	6) cp_download_files && ret=0;;
+	7) make clean && ret=0;;
 esac
 
 exec 3>&-

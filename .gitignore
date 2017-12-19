@@ -1,0 +1,10 @@
+*.o
+*.cmd
+*.su
+*.*~
+SD/
+out/
+chosen_board.mk
+env.sh
+linux-mt/output/
+build.log
