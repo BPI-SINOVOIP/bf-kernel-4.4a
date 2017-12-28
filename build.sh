@@ -5,7 +5,9 @@
 TARGET_PRODUCT="bpi-r2"
 BOARD=BPI-R2-720P
 board="bpi-r2"
-kernel="4.4.108-BPI-R2-Kernel"
+kernver=$(cd linux-mt;make kernelversion)
+#kernel="4.4.108-BPI-R2-Kernel"
+kernel=${kernver}"-BPI-R2-Kernel"
 MODE=$1
 BPILINUX=linux-mt
 BPIPACK=mt-pack
@@ -52,13 +54,13 @@ R="${SD}/BPI-ROOT"
 	#
 	## create files for bpi-tools & bpi-migrate
 	#
-	(cd $B ; tar czvf $SD/BPI-BOOT-${board}.tgz .)
+	(cd $B ; tar czvf $SD/${kernel}-BPI-BOOT-${board}.tgz .)
 	(cd $R ; tar czvf $SD/${kernel}-net.tgz lib/modules/${kernel}/kernel/net)
 	(cd $R ; mv lib/modules/${kernel}/kernel/net $R/net)
 	(cd $R ; tar czvf $SD/${kernel}.tgz lib/modules)
 	(cd $R ; mv $R/net lib/modules/${kernel}/kernel/net)
 	(cd $R ; tar czvf $SD/BOOTLOADER-${board}.tgz usr/lib/u-boot/bananapi)
-
+	(cd $SD ; md5sum ${kernel}-BPI-BOOT-${board}.tgz ${kernel}.tgz > ${kernel}.md5)
 	return #SKIP
 }
 
