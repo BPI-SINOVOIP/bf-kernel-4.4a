@@ -1890,17 +1890,17 @@ static u32 mt53xx_nor_WaitHostIdle(struct mt53xx_nor *mt53xx_nor)
 #if 0
 static s32 _SetFlashEnter4Byte(struct mt53xx_nor *mt53xx_nor)
 {
-	u32 u4Index, u4DualReg, u4Polling;
-	u4Index = 0;
+	u32 /*u4Index,*/ u4DualReg, u4Polling;
+	//u4Index = 0;
 	if(mt53xx_nor_WriteEnable(mt53xx_nor) != 0)
     {
         return 1;
-    }	
-	
+    }
+
     if( (mt53xx_nor->flash_info[0].u1MenuID == 0x01) &&(mt53xx_nor->flash_info[0].u1DevID1 == 0x02) &&(mt53xx_nor->flash_info[0].u1DevID2 == 0x19) )	//for spansion S25FL256s flash
     {
         SFLASH_WREG8(SFLASH_PRGDATA5_REG, 0x17);	//Enter EN4B cmd
-        SFLASH_WREG8(SFLASH_PRGDATA4_REG, 0x80);	
+        SFLASH_WREG8(SFLASH_PRGDATA4_REG, 0x80);
         SFLASH_WREG8(SFLASH_CNT_REG,16); 			// Write SF Bit Count
     }
     else
@@ -1908,22 +1908,22 @@ static s32 _SetFlashEnter4Byte(struct mt53xx_nor *mt53xx_nor)
         SFLASH_WREG8(SFLASH_PRGDATA5_REG, 0xb7);	//Enter EN4B cmd
         SFLASH_WREG8(SFLASH_CNT_REG,8); 			// Write SF Bit Count
     }
-   
+
     mt53xx_nor->cur_cmd_val = 0x04;
     if(-1 == mt53xx_nor_ExecuteCmd(mt53xx_nor))
     {
         printf( "4byte addr enable failed!\n");
         return -1;
     }
-	
-	u4DualReg = SFLASH_RREG32(SFLASH_DUAL_REG); 
+
+	u4DualReg = SFLASH_RREG32(SFLASH_DUAL_REG);
 	u4DualReg |= 0x10;
 	SFLASH_WREG32(SFLASH_DUAL_REG, u4DualReg);
 
     u4Polling = 0;
     while(1)
     {
-        u4DualReg = SFLASH_RREG32(SFLASH_DUAL_REG); 
+        u4DualReg = SFLASH_RREG32(SFLASH_DUAL_REG);
         if (0x10 == (u4DualReg & 0x10))
         {
             break;
@@ -1933,7 +1933,7 @@ static s32 _SetFlashEnter4Byte(struct mt53xx_nor *mt53xx_nor)
         {
             return 1;
         }
-    }	
+    }
 	//LOG(0, "...cdd Enter 4 bytes address!\n");
 	return 0;
 }

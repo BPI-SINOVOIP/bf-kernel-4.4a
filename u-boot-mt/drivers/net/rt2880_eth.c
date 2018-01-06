@@ -858,23 +858,23 @@ void trgmii_calibration_7623(void) {
 	unsigned int  rd_wd;
 	int  i;
 	unsigned int err_cnt[5];
-	unsigned int init_toggle_data;
+	//unsigned int init_toggle_data;
 	unsigned int err_flag[5];
 	unsigned int err_total_flag;
-	unsigned int training_word;
+	//unsigned int training_word;
 	unsigned int rd_tap;
 	unsigned int is_mt7623_e1 = 0;
 
 	u32  TRGMII_7623_base;
 	u32  TRGMII_7623_RD_0;
-	u32  TRGMII_RCK_CTRL;
+	//u32  TRGMII_RCK_CTRL;
 	TRGMII_7623_base = ETHDMASYS_ETH_SW_BASE+0x0300;
 	TRGMII_7623_RD_0 = TRGMII_7623_base + 0x10;
-	TRGMII_RCK_CTRL = TRGMII_7623_base;
+	//TRGMII_RCK_CTRL = TRGMII_7623_base;
 	rxd_step_size =0x1;
 	rxc_step_size =0x4;
-	init_toggle_data = 0x00000055;
-	training_word    = 0x000000AC;
+	//init_toggle_data = 0x00000055;
+	//training_word    = 0x000000AC;
 
 	//printk("Calibration begin ........");
 	*(volatile u_long *)(TRGMII_7623_base +0x04) &= 0x3fffffff;   // RX clock gating in MT7623
@@ -1064,8 +1064,8 @@ void trgmii_calibration_7623(void) {
 }
 
 
-void trgmii_calibration_7530(void){ 
-
+void trgmii_calibration_7530(void)
+{
 	unsigned int  tap_a[5] = {0, 0, 0, 0, 0};
 	unsigned int  tap_b[5] = {0, 0, 0, 0, 0};
 	unsigned int  final_tap[5];
@@ -1073,13 +1073,13 @@ void trgmii_calibration_7530(void){
 	unsigned int  rxd_step_size;
 	unsigned int  read_data;
 	unsigned int  tmp;
-	int  i,j;
+	int  i;//,j;
 	unsigned int err_cnt[5];
 	unsigned int rd_wd;
-	unsigned int init_toggle_data;
+	//unsigned int init_toggle_data;
 	unsigned int err_flag[5];
 	unsigned int err_total_flag;
-	unsigned int training_word;
+	//unsigned int training_word;
 	unsigned int rd_tap;
 	unsigned int is_mt7623_e1 = 0;
 #define DEVINFO_BASE                    0x17000000
@@ -1088,17 +1088,17 @@ void trgmii_calibration_7530(void){
 	u32  TRGMII_7530_RD_0;
 	u32  TRGMII_RCK_CTRL;
 	u32 TRGMII_7530_base;
-	u32 TRGMII_7530_TX_base;
+	//u32 TRGMII_7530_TX_base;
 	TRGMII_7623_base = 0x1B110300;
 	TRGMII_7530_base = 0x7A00;
 	TRGMII_7530_RD_0 = TRGMII_7530_base + 0x10;
-	TRGMII_RCK_CTRL = TRGMII_7623_base;
+	//TRGMII_RCK_CTRL = TRGMII_7623_base;
 	rxd_step_size = 0x1;
 	rxc_step_size = 0x8;
-	init_toggle_data = 0x00000055;
-	training_word = 0x000000AC;
+	//init_toggle_data = 0x00000055;
+	//training_word = 0x000000AC;
 
-	TRGMII_7530_TX_base = TRGMII_7530_base + 0x50;
+	//TRGMII_7530_TX_base = TRGMII_7530_base + 0x50;
 
 	tmp = *(volatile u_long *)(DEVINFO_BASE+0x8);
 	if(tmp == 0x0000CA00)
