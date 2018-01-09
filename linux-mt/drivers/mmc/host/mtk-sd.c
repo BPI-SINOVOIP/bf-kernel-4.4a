@@ -721,7 +721,8 @@ static void msdc_set_mclk(struct msdc_host *host, unsigned char timing, u32 hz)
 	if (host->dev_comp->clk_div_bits == 8)
 		sdr_set_field(host->base + MSDC_CFG,
 				MSDC_CFG_CKMOD | MSDC_CFG_CKDIV,
-				(mode << 8) | (div % 0xff));
+				//(mode << 8) | (div % 0xff));
+				(mode << 8) | div);
 	else
 		sdr_set_field(host->base + MSDC_CFG,
 				MSDC_CFG_CKMOD_EXTRA | MSDC_CFG_CKDIV_EXTRA,
@@ -1893,7 +1894,8 @@ static int msdc_drv_probe(struct platform_device *pdev)
 	/* Set host parameters to mmc */
 	mmc->ops = &mt_msdc_ops;
 	if (host->dev_comp->clk_div_bits == 8)
-		mmc->f_min = host->src_clk_freq / (4 * 255);
+		//mmc->f_min = host->src_clk_freq / (4 * 255);
+		mmc->f_min = DIV_ROUND_UP(host->src_clk_freq, 4 * 255);
 	else
 		mmc->f_min = host->src_clk_freq / (4 * 4095);
 

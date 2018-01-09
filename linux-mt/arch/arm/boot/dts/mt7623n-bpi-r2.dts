@@ -658,6 +658,12 @@
 &uart2 {
 	status = "okay";
 };
+&uart0 {
+	status = "okay";
+};
+&uart1 {
+	status = "okay";
+};
 
 &u3phy1 {
 	status = "okay";

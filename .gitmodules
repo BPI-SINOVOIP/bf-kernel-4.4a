@@ -1,0 +1,3 @@
+[submodule "linux-mt/drivers/net/wireless/mediatek/mt76"]
+	path = linux-mt/drivers/net/wireless/mediatek/mt76
+	url = https://github.com/dfiloni/mt76.git
