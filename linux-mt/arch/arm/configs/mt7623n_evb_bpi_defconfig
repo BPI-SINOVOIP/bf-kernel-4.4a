@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm 4.4.112 Kernel Configuration
+# Linux/arm 4.4.116 Kernel Configuration
 #
 CONFIG_ARM=y
 CONFIG_ARM_HAS_SG_CHAIN=y
@@ -1872,7 +1872,7 @@ CONFIG_SCSI_OSD_INITIATOR=m
 CONFIG_SCSI_OSD_ULD=m
 CONFIG_SCSI_OSD_DPRINT_SENSE=1
 # CONFIG_SCSI_OSD_DEBUG is not set
-CONFIG_ATA=m
+CONFIG_ATA=y
 # CONFIG_ATA_NONSTANDARD is not set
 CONFIG_ATA_VERBOSE_ERROR=y
 CONFIG_SATA_PMP=y
@@ -1880,7 +1880,7 @@ CONFIG_SATA_PMP=y
 #
 # Controllers with non-SFF native interface
 #
-CONFIG_SATA_AHCI=m
+CONFIG_SATA_AHCI=y
 # CONFIG_SATA_AHCI_PLATFORM is not set
 # CONFIG_AHCI_CEVA is not set
 # CONFIG_AHCI_MTK is not set
