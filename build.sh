@@ -58,6 +58,10 @@ R="${SD}/BPI-ROOT"
 	(cd $R ; tar czvf $SD/${kernel}-net.tgz lib/modules/${kernel}/kernel/net)
 	(cd $R ; mv lib/modules/${kernel}/kernel/net $R/net)
 	(cd $R ; tar czvf $SD/${kernel}.tgz lib/modules)
+
+	(cd $SD;tar czvf $SD/${kernel}_boot+root.tgz BPI-BOOT BPI-ROOT/lib/modules)
+	(cd $SD ; md5sum ${kernel}_boot+root.tgz > ${kernel}_boot+root.md5)
+
 	(cd $R ; mv $R/net lib/modules/${kernel}/kernel/net)
 	(cd $R ; tar czvf $SD/BOOTLOADER-${board}.tgz usr/lib/u-boot/bananapi)
 	(cd $SD ; md5sum ${kernel}-BPI-BOOT-${board}.tgz ${kernel}.tgz > ${kernel}.md5)
