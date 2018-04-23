@@ -450,6 +450,10 @@
     "bootmenu_4=5. System Load Linux Kernel then write to Flash via Serial.=run boot4\0" \
     "bootmenu_5=6. System Load Boot Loader then write to Flash via Serial.=run boot5\0" \
     "bootmenu_6=7. Boot system code via Flash.=run boot2\0" \
+    "bootmenu_7=8. Boot Kernel 4.4.=run boot44\0" \
+    "bootmenu_8=9. Boot Kernel 4.9.=run boot49\0" \
+    "boot44=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel44}; bootm\0" \
+    "boot49=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel49}; bootm\0" \
     "bpiver=1\0" \
     "bpi=bananapi\0" \
     "board=bpi-r2\0" \
@@ -459,6 +463,10 @@
     "device=mmc\0" \
     "partition=1:1\0" \
     "kernel=uImage\0" \
+    "kernel44=uImage_4.4\0" \
+    "kernel49=uImage_4.9\0" \
+    "kernel414=uImage_4.14\0" \
+    "kernel416=uImage_4.16\0" \
     "root=/dev/mmcblk0p2\0" \
     "debug=7\0" \
     "bootenv=uEnv.txt\0" \
