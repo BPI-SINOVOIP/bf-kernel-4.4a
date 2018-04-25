@@ -455,7 +455,7 @@
     "bootmenu_9=10. Boot Kernel 4.16.=run boot416\0" \
     "boot44=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel44}; bootm\0" \
     "boot49=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel49}; bootm\0" \
-    "boot416=run newloadenv; setenv kernel ${kernel416}; run newboot\0" \
+    "boot416=run newloadenv; setenv kernel ${kernel416}; printenv; run newboot\0" \
     "bpiver=1\0" \
     "bpi=bananapi\0" \
     "board=bpi-r2\0" \
@@ -475,7 +475,7 @@
     "checksd=fatinfo ${device} 1:1\0" \
     "loadbootenv=fatload ${device} ${partition} ${scriptaddr} ${bpi}/${board}/${service}/${bootenv} || fatload ${device} ${partition} ${scriptaddr} ${bootenv}\0" \
     "boot_normal=if run checksd; then echo Boot from SD ; setenv partition 1:1; else echo Boot from eMMC ; mmc init 0 ; setenv partition 0:1 ; fi; if run loadbootenv; then echo Loaded environment from ${bootenv}; env import -t ${scriptaddr} ${filesize}; fi; run uenvcmd; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel}; bootm\0" \
-    "newloadenv=mmc init; if run checksd; then echo Boot from SD ; setenv partition 1:1; else echo Boot from eMMC ; mmc init 0 ; setenv partition 0:1 ; fi; if run loadbootenv; then echo Loaded environment from ${bootenv}; env import -t ${scriptaddr} ${filesize}; fi; run uenvcmd\0" \
+    "newloadenv=mmc init; run loadbootenv; env import -t ${scriptaddr} ${filesize};\0" \
     "newboot=fatload mmc ${partition} ${loadaddr} ${bpi}/${board}/${service}/${kernel}; bootm\0" \
     "bootmenu_delay=30\0" \
     ""
