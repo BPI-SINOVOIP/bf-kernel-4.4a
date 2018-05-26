@@ -441,20 +441,23 @@
     Browser_BOOT_MENU \
     SDcard_BOOT_MENU
 
+/*
 
+
+*/
 #define ENV_BOOT_MENU \
     "bootmenu_0=1. System Load Linux to SDRAM via TFTP.=run boot0\0" \
     "bootmenu_1=2. System Load Linux Kernel then write to Flash via TFTP.=run boot1\0" \
     "bootmenu_2=3. Boot Linux from SD.=run boot10\0" \
     "bootmenu_3=4. System Load Boot Loader then write to Flash via TFTP.=run boot3\0" \
     "bootmenu_4=5. System Load Linux Kernel then write to Flash via Serial.=run boot4\0" \
-    "bootmenu_5=6. System Load Boot Loader then write to Flash via Serial.=run boot5\0" \
-    "bootmenu_6=7. Boot system code via Flash.=run boot2\0" \
-    "bootmenu_7=8. Boot Kernel 4.4.=run boot44\0" \
-    "bootmenu_8=9. Boot Kernel 4.9.=run boot49\0" \
-    "bootmenu_9=10. Boot Kernel 4.16.=run boot416\0" \
+    "bootmenu_5=6. Boot Kernel 4.4.=run boot44\0" \
+    "bootmenu_6=7. Boot Kernel 4.9.=run boot49\0" \
+    "bootmenu_7=8. Boot Kernel 4.14.=run boot414\0" \
+    "bootmenu_8=9. Boot Kernel 4.16.=run boot416\0" \
     "boot44=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel44}; bootm\0" \
     "boot49=mmc init; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel49}; bootm\0" \
+    "boot414=run newloadenv; setenv kernel ${kernel414}; printenv; run newboot\0" \
     "boot416=run newloadenv; setenv kernel ${kernel416}; printenv; run newboot\0" \
     "bpiver=1\0" \
     "bpi=bananapi\0" \
