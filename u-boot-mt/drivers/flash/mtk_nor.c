@@ -1490,7 +1490,7 @@ static u32 mt53xx_nor_ReadDMA(struct mt53xx_nor *mt53xx_nor, u32 addr, u32 len, 
 static u32 mt53xx_nor_Read(struct mt53xx_nor *mt53xx_nor, u32 addr, u32 len, u32 *retlen, u8 *buf)
 {
   u32 ret = 0, len_align = 0/*, dram_addr_off = 0, i*/;
-  u8 info /*, attr*/;
+  u8 info, attr;
 
 
   attr = mt53xx_nor->host_act_attr;
@@ -2048,7 +2048,7 @@ static u32 mt53xx_nor_WriteSingleByte(struct mt53xx_nor *mt53xx_nor, u32 u4addr,
 static u32 mt53xx_nor_WriteBuffer(struct mt53xx_nor *mt53xx_nor, 
 	                                      u32 u4addr, u32 u4len, const u8 *buf)
 {
-  u32 i, j, bufidx, data/*, addr*/;
+  u32 i, j, bufidx, data, addr;
   u8 index;
 
   if(buf == NULL)
