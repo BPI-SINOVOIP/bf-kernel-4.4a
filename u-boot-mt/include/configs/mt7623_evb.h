@@ -483,7 +483,7 @@
     "boot_normal=if run checksd; then echo Boot from SD ; setenv partition 1:1; else echo Boot from eMMC ; mmc init 0 ; setenv partition 0:1 ; fi; if run loadbootenv; then echo Loaded environment from ${bootenv}; env import -t ${scriptaddr} ${filesize}; fi; run uenvcmd; fatload mmc 0:1 ${loadaddr} ${bpi}/${board}/${service}/${kernel}; bootm\0" \
     "newloadenv=mmc init; run loadbootenv; env import -t ${scriptaddr} ${filesize};\0" \
     "newboot=fatload mmc ${partition} ${loadaddr} ${bpi}/${board}/${service}/${kernel}; bootm\0" \
-    "reloadmenu=run newloadenv\0" \
+    "reloadmenu=run newloadenv; bootmenu\0" \
     "newchecksd=if run checksd; then echo Boot from SD ; setenv partition 1:1; else echo Boot from eMMC ; mmc init 0 ; setenv partition 0:1 ; fi;\0" \
     "bootmenu_delay=30\0" \
     ""
