@@ -373,7 +373,7 @@ static irqreturn_t mt53xx_nor_HandleIsr(int irq, void *dev_id)
   SFLASH_WREG8(SFLASH_SF_INTRSTUS_REG, intvect);
   while((SFLASH_RREG8(SFLASH_SF_INTRSTUS_REG)& SFLASH_EN_INT))
   	{
-  		printf( "Nor£ºinterrupt not be clear\n");
+  		printf( "NorÂ£Âºinterrupt not be clear\n");
 		SFLASH_WREG8(SFLASH_SF_INTRSTUS_REG, intvect);
   	}
   	
@@ -1489,8 +1489,8 @@ static u32 mt53xx_nor_ReadDMA(struct mt53xx_nor *mt53xx_nor, u32 addr, u32 len, 
 
 static u32 mt53xx_nor_Read(struct mt53xx_nor *mt53xx_nor, u32 addr, u32 len, u32 *retlen, u8 *buf)
 {
-  u32 ret = 0, dram_addr_off = 0, len_align = 0, i;
-  u8 info, attr;
+  u32 ret = 0, len_align = 0/*, dram_addr_off = 0, i*/;
+  u8 info /*, attr*/;
 
 
   attr = mt53xx_nor->host_act_attr;
@@ -1691,8 +1691,8 @@ static u32 mt53xx_nor_read(struct mtd_info *mtd, loff_t from, size_t len, size_t
 {
   struct mt53xx_nor *mt53xx_nor = mtd_to_mt53xx_nor(mtd);
 #endif
-  u32 ret = 0, i;
-   u32 phyaddr; 
+   u32 ret = 0/*, i*/;
+   //u32 phyaddr; 
    u8 *readBuf;
    u32 readLen;
    //struct timespec tv,tv1;
@@ -1722,7 +1722,9 @@ static u32 mt53xx_nor_read(struct mtd_info *mtd, loff_t from, size_t len, size_t
   //mutex_lock(&mt53xx_nor->lock);
   
  //make sure the 0xFF had been write to dram
+#ifdef MULTI_READ_DMA
 MultiRead:
+#endif
  /*  memset(buf,0xAA,len);
  if(virt_addr_valid((u32)buf ))
  	{
@@ -1842,11 +1844,11 @@ MultiRead:
   }
 #endif
   }
-
+#ifdef MULTI_READ_DMA
 done:
 //	getnstimeofday(&tv1);
 //	readtime = (1000000000 * tv1.tv_sec + tv1.tv_nsec) - (1000000000 * tv.tv_sec + tv.tv_nsec);
-
+#endif
   //mutex_unlock(&mt53xx_nor->lock);
 //  printf( "%s (addr = %08x, len = %08x, retlen = %08x buf = %08x  readtime=%08x speed=%08x %08x)\n", __FUNCTION__,(u32)from,(u32)len,(u32)(*retlen),buf,readtime, tv1.tv_nsec, tv.tv_nsec);
 
@@ -2046,7 +2048,7 @@ static u32 mt53xx_nor_WriteSingleByte(struct mt53xx_nor *mt53xx_nor, u32 u4addr,
 static u32 mt53xx_nor_WriteBuffer(struct mt53xx_nor *mt53xx_nor, 
 	                                      u32 u4addr, u32 u4len, const u8 *buf)
 {
-  u32 i, j, bufidx, data, addr;
+  u32 i, j, bufidx, data/*, addr*/;
   u8 index;
 
   if(buf == NULL)
@@ -2343,8 +2345,9 @@ static u32 mt53xx_nor_write(struct mtd_info *mtd, loff_t to, size_t len, size_t 
 {
   struct mt53xx_nor *mt53xx_nor = mtd_to_mt53xx_nor(mtd);
 #endif
-  u32 addr, u4len, i, count, pgalign, ret = 0, j;
-  u8 *u1buf, info;
+  //u32 addr, u4len, i, count, pgalign, ret = 0, j;
+  u32 ret = 0;
+  //u8 *u1buf, info;
 #if NOR_DEBUG
   struct timeval t0;
 #endif
@@ -2391,7 +2394,7 @@ static u32 mt53xx_nor_write(struct mtd_info *mtd, loff_t to, size_t len, size_t 
   do_gettimeofday(&t0);
   printf( "[Time trace:%s(%d) time = %ld\n", __FUNCTION__,__LINE__,t0.tv_sec*1000+t0.tv_usec); 
 #endif	
-done:
+//done:
 	
   //mutex_unlock(&mt53xx_nor->lock);
 
@@ -2874,8 +2877,8 @@ MODULE_DESCRIPTION("MTD NOR driver for mediatek BD boards");
 
 static s32 _SetFlashExit4Byte(struct mt53xx_nor *mt53xx_nor)
 {
-	u32 u4Index, u4DualReg, u4Polling;
-	u4Index = 0;
+	u32 /*u4Index,*/ u4DualReg, u4Polling;
+	//u4Index = 0;
 
 	u4DualReg = SFLASH_RREG32(SFLASH_DUAL_REG); 
 	u4DualReg &= ~0x10;
@@ -2926,8 +2929,8 @@ static s32 _SetFlashExit4Byte(struct mt53xx_nor *mt53xx_nor)
 
 static s32 _SetFlashEnter4Byte(struct mt53xx_nor *mt53xx_nor)
 {
-	u32 u4Index, u4DualReg, u4Polling;
-	u4Index = 0;
+	u32 /*u4Index,*/ u4DualReg, u4Polling;
+	//u4Index = 0;
 
     // dont enter 4 byte mode if size < 32MB
     if (mt53xx_nor->flash_info[0].u4ChipSize < 0x2000000)
@@ -2991,7 +2994,7 @@ static s32 _SetFlashEnter4Byte(struct mt53xx_nor *mt53xx_nor)
 #if defined(__UBOOT_NOR__)
 int mtk_nor_init(void)
 {
-	int reg;
+	//int reg;
 
 	// to do: need to remove later
 	{
