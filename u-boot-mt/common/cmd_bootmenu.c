@@ -256,6 +256,8 @@ static struct bootmenu_data *bootmenu_create(int delay)
 	int len;
 	char *sep;
 	struct bootmenu_entry *entry;
+	char *default_str = NULL;
+
 
 	menu = malloc(sizeof(struct bootmenu_data));
 	if (!menu)
@@ -267,6 +269,12 @@ static struct bootmenu_data *bootmenu_create(int delay)
 #else
 	menu->active = 0;
 #endif
+
+	default_str = getenv("bootmenu_default");
+	if (default_str)
+		menu->active = (int)simple_strtol(default_str, NULL, menu->active);
+
+
 	menu->first = NULL;
 
 	while ((option = bootmenu_getoption(i))) {
