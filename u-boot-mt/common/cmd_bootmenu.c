@@ -272,7 +272,7 @@ static struct bootmenu_data *bootmenu_create(int delay)
 
 	default_str = getenv("bootmenu_default");
 	if (default_str)
-		menu->active = (int)simple_strtol(default_str, NULL, menu->active);
+		menu->active = (int)simple_strtol(default_str, NULL, 10);
 
 
 	menu->first = NULL;
