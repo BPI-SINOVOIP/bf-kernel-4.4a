@@ -457,11 +457,9 @@
     "bootmenu_3=4. Boot Kernel 4.4.=run boot44\0" \
     "bootmenu_4=5. Boot Kernel 4.9.=run boot49\0" \
     "bootmenu_5=6. Boot Kernel 4.14.=run boot414\0" \
-    "bootmenu_6=7. Boot Kernel 4.16.=run boot416\0" \
     "boot44=run newloadenv; setenv kernel ${kernel44}; printenv; run newboot\0" \
     "boot49=run newloadenv; setenv kernel ${kernel49}; printenv; run newboot\0" \
     "boot414=run newloadenv; setenv kernel ${kernel414}; printenv; run newboot\0" \
-    "boot416=run newloadenv; setenv kernel ${kernel416}; printenv; run newboot\0" \
     "bpiver=1\0" \
     "bpi=bananapi\0" \
     "board=bpi-r2\0" \
@@ -474,7 +472,6 @@
     "kernel44=uImage_4.4\0" \
     "kernel49=uImage_4.9\0" \
     "kernel414=uImage_4.14\0" \
-    "kernel416=uImage_4.16\0" \
     "root=/dev/mmcblk0p2\0" \
     "debug=7\0" \
     "bootenv=uEnv.txt\0" \
