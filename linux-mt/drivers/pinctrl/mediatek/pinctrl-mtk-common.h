@@ -319,7 +319,7 @@ struct mtk_pinctrl_devdata {
 	unsigned int	n_pin_drve4;
 	const struct mtk_pin_info	*pin_drve8_grps;
 	unsigned int	n_pin_drve8;
-	const const struct mtk_pin_drv_grp	*pin_drv_grp;
+	const struct mtk_pin_drv_grp	*pin_drv_grp;
 	unsigned int	n_pin_drv_grps;
 	int (*spec_pull_set)(struct regmap *reg, unsigned int pin,
 			unsigned char align, bool isup, unsigned int arg);
